@@ -6,9 +6,9 @@ VER=2.5
 # Tur-Archiver 2.x is a total rewrite from 1.x. It can copy, move   #
 # or make symlinks from whatever you want, to wherever you want.    #
 #                                                                   #
-# It is NOT a spacemaker and shouldnt be used as such.              #
+# It is NOT a spacemaker and shouldn't be used as such.             #
 #                                                                   #
-# Its more ment as a "sorter" of some kind. You specify WHERE it    #
+# It's more meant as a "sorter" of some kind. You specify WHERE it  #
 # should look, WHAT it should look for and WHERE you want to put it.#
 # By putting it, I mean either copy, move or make a symlink to it.  #
 #                                                                   #
@@ -23,15 +23,15 @@ VER=2.5
 #                                                                   #
 #--[ Settings ]-----------------------------------------------------#
 #                                                                   #
-# GLROOT     = Simple the root of your glftpd dir.                  #
+# GLROOT     = Simple, the root of your glftpd dir.                 #
 #              This is automatically added to the front of each     #
-#              source and destination dir you soon choose.          #
+#              source and destination dir you will soon choose.     #
 #                                                                   #
 # SITEROOT   = Path to 'site', from $GLROOT. /site is usually ok.   #
 #                                                                   #
-# today      = Incase you wish to use this in dated dirs, this will #
-#              automatically set $today to todays dated dir (MMDD). #
-#              The we can use $today in MOVE below.                 #
+# today      = In case you wish to use this in dated dirs, this     #
+#              will automatically set $today to todays dated dir    #
+#              (MMDD). Then we can use $today in MOVE below.        #
 #                                                                   #
 # MOVE       = Ahh, the heart of it all.                            #
 #              Format is:                                           #
@@ -46,13 +46,13 @@ VER=2.5
 #              /0DAY/0203                                           #
 #              /0DAY/0204 etc.                                      #
 #              Instead, you can specify /0DAY~DEEP here.            #
-#              It will then go into every subdir, part from those   #
+#              It will then go into every subdir, apart from those  #
 #              in EXCLUDE= (below) and process each dir as if you   #
 #              had set them up the slow way.                        #
 #                                                                   #
 #              What_To_Look_For is a standard egrep query. That     #
 #              means you should know something about basic egrep to #
-#              use it at best. For instance GROUPS means it will    #
+#              use it at best. For instance, GROUPS means it will   #
 #              match the word GROUPS anywhere in the release.       #
 #                                                                   #
 #              ^GROUPS means the dir must START with GROUPS.        #
@@ -60,15 +60,16 @@ VER=2.5
 #              ^GROUPS$ means the dir must be named exactly GROUPS. #
 #                                                                   #
 #              Any odd chars must be escaped. For instance a .      #
-#              would mean "anything" whereas \. means a real dot.   #
+#              would mean "anything" whereas \. means a real        #
+#              period.                                              #
 #                                                                   #
 #              Do NOT use spaces in this one. If you must, use "\ " #
-#              (ie, escape the space).                              #
+#              (i.e. escape the space).                             #
 #                                                                   #
-#              If you want to search for - . OR _  do [\_-\.]       #
-#              For instance [\_-\.]internal[\_-\.]                  #
+#              If you want to search for - . OR _  do [_.-]         #
+#              For instance [_.-]internal[_.-]                      #
 #                                                                   #
-#              Seperate different querys with a | sign.             #
+#              Separate different queries with a | sign.            #
 #                                                                   #
 #              Where_To_Put_It is where to put the resulting dir.   #
 #              If you must use a space here, use [space] instead.   #
@@ -87,7 +88,7 @@ VER=2.5
 #              M = Move the release here.                           #
 #                                                                   #
 # EXCLUDE    = This too is a default egrep line, case sensitive.    #
-#              Anything matched here will be totally ignored        #
+#              Anything matched here will be totally ignored,       #
 #              even if it matches a hit.                            #
 #                                                                   #
 # MINUTES_OLD= How old, in minutes, must the release be before we   #
@@ -103,24 +104,24 @@ VER=2.5
 #              release with zipscript-c.                            #
 #                                                                   #
 #              If the release has multiple CD's, each CDx dir must  #
-#              contain this (We'll only check CD1 -> CD9)           #
+#              contain this (We'll only check CD1 -> CD9).          #
 #                                                                   #
 #              This is also an egrep search, case sensitive, so if  #
 #              you want to add other stuff that should also make    #
-#              the release ok to move just add it here, | seperated #
+#              the release ok to move just add it here, | separated #
 #                                                                   #
-#              Set to "" to disable or put a # infront of it.       #
+#              Set to "" to disable, or put a # infront of it.      #
 #                                                                   #
 # TULS       = This is only valid if WHAT_TO_DO is set to M for     #
 #              move. It will grab the date on the release before    #
 #              moving it and after the move, touch the dir to that  #
 #              date so it keeps the same time on it.                #
-#              Not everyone needs this as some mv binaries saves    #
+#              Not everyone needs this, as some mv binaries saves   #
 #              the time automatically.                              #
 #                                                                   #
 #              To use this function, you'll need a binary called    #
 #              tuls. Its available at www.grandis.nu/glftpd as well.#
-#              Read the info in for compile instructions, etc.      #
+#              Read the info in it for compile instructions, etc.   #
 #                                                                   #
 #              Your touch binary also needs to support -d for       #
 #              specifying which date to touch it with.              #
@@ -128,17 +129,17 @@ VER=2.5
 #              Leave this empty to disable that function.           #
 #                                                                   #
 # NO_SFV_OK  = TRUE/FALSE. With FALSE, it will just check CHECK_FOR #
-#              and if it exists, its ok to move it (if its old      #
+#              and if it exists, it's ok to move it (if it's old    #
 #              enough), but some releases would never get moved.    #
 #              Specifically, DIRFIX etc, which has no .sfv and does #
 #              not have a complete dir.                             #
 #                                                                   #
-#              With TRUE, it will check that there really is a sfv  #
-#              in the dir. If there is a sfv and CHECK_FOR is not   #
-#              found, its NOT ok to move yet (not completed).       #
+#              With TRUE, it will check that there really is an sfv #
+#              in the dir. If there is an sfv and CHECK_FOR is not  #
+#              found, it's NOT ok to move yet (not completed).      #
 #                                                                   #
-#              In short, if no sfv exists, its ok to move it anyway #
-#              as long as its old enough in MINUTES_OLD.            #
+#              In short, if no sfv exists, it's ok to move it       #
+#              anyway, as long as it's old enough in MINUTES_OLD.   #
 #                                                                   #
 # HOW_TO_SYMLINK = This is how it will run if WHAT_TO_DO is S.      #
 # HOW_TO_MOVE    = This is how it will run if WHAT_TO_DO is M.      #
@@ -149,18 +150,18 @@ VER=2.5
 #                  If this is TRUE, it will delete every            #
 #                  Where_To_Put_It dir before it starts and then    #
 #                  recreate them with 755 permissions.              #
-#                  Its to make sure there are no "dead" symlinks.   #
+#                  It's to make sure there are no "dead" symlinks.  #
 #                  Be careful with this, as it will rm -f any dir   #
 #                  you set as destination for the symlinks.         #
 #                                                                   #
-#                  If you dont want 755 perms, search for -m755     #
+#                  If you don't want 755 perms, search for -m755    #
 #                  below and change it to whatever you want.        #
 #                                                                   #
 # REVERSED_SYMLINK= TRUE/FALSE.                                     #
 #                   This is ONLY if you want to move releases. In   #
 #                   other words, if WHAT_TO_DO is M.                #
 #                   Setting this to TRUE will move the release as   #
-#                   usual but then make a symlink in its original   #
+#                   usual, but then make a symlink in its original  #
 #                   location.                                       #
 #                                                                   #
 #                   The symlink will be created using               #
@@ -169,45 +170,45 @@ VER=2.5
 #                   These symlinks will not be cleared and          #
 #                   SYMLINK_CLEAR has no function here.             #
 #                                                                   #
-# FILE_DATE  = Incase MINUTES_OLD is set, we use the included       #
+# FILE_DATE  = In case MINUTES_OLD is set, we use the included      #
 #              file_date binary to check its age. Here you specify  #
-#              it location.                                         #
+#              its location.                                        #
 #              We could use tuls for this as well, but I'm too lazy #
 #                                                                   #
-# DATE_BIN   = Incase MINUTES_OLD is set, we need a GNU compliant   #
+# DATE_BIN   = In case MINUTES_OLD is set, we need a GNU compliant  #
 #              date binary that supports the -d option.             #
 #              Most users can leave it at just "date".              #
 #              FBSD users will want to download sh-utils. It will   #
 #              install a binary called gdate which you must specify #
 #              here.                                                #
 #                                                                   #
-# DEBUG      = TRUE/FALSE. Just a precation. You must set this to   #
+# DEBUG      = TRUE/FALSE. Just a precaution. You must set this to  #
 #              FALSE for it to actually do anything. With it on     #
-#              TRUE, its the same as if you used the 'debug' arg.   #
+#              TRUE, it's the same as if you used the 'debug' arg.  #
 #                                                                   #
 #--[ Running it ]---------------------------------------------------#
 #                                                                   #
 # Running it with the argument 'debug' (without the '') will not do #
-# anything except show you what it WOULD have done. I recomend you  #
-# use this everytime you make a change in any part.                 #
+# anything, except show you what it WOULD have done. I recommend    #
+# that you use this every time you make a change in any part.       #
 #                                                                   #
-# Running it without args will make a live run. Shouldnt output     #
-# anything then. If DEBUG=TRUE, it will still not do anything !     #
+# Running it without args will make a live run. Shouldn't output    #
+# anything then. If DEBUG=TRUE, it will still not do anything!      #
 #                                                                   #
 #--[ Changelog ]----------------------------------------------------#
 #                                                                   #
-# 2.5   : When checking how old a release is, it simply did not     
-#         work. Now, since nobody has complained about this and its 
-#         been a long time since 2.4, I'm not sure if this applies  
-#         to everyone.                                              
-#         In either case;                                           
+# 2.5   : When checking how old a release is, it simply did not     #
+#         work. Now, since nobody has complained about this and     #
+#         it's been a long time since 2.4, I'm not sure if this     #
+#         applies to everyone.                                      #
+#         In either case;                                           #
 #         REL_DATE="`$DATE_BIN -d "$($FILE_DATE $releasename)" +%s`"
-#         was changed to:                                           
+#         was changed to:                                           #
 #         REL_DATE="`$DATE_BIN -d "$($FILE_DATE $FROM_DIR/$releasename)" +%s`"
-#         so if the new version does not work for you when checking 
-#         the age of releases, change it back to what it was =)     
-#                                                                   
-# 2.4   : The path in MOVE now support ~DEEP to enter each subdir   #
+#         so if the new version does not work for you when checking #
+#         the age of releases, change it back to what it was =)     #
+#                                                                   #
+# 2.4   : The path in MOVE now supports ~DEEP to enter each subdir  #
 #         of the defined dir.                                       #
 #                                                                   #
 # 2.3   : Added TULS=. Read up on it above.                         #
@@ -222,11 +223,11 @@ VER=2.5
 #                                                                   #
 #         Changed ROOT=/glftpd/site to GLROOT=/glftpd               #
 #         Changed SYM_ROOT=/site to SITEROOT=/site                  #
-#         Above changes was made to more easely create symlinks.    #
+#         Above changes were made to more easily create symlinks.   #
 #                                                                   #
 # 2.1   : Added NO_SFV_OK. Check explanation above.                 #
 #                                                                   #
-#         Fixed a problem if the release was less then 60 seconds   #
+#         Fixed a problem if the release was less than 60 seconds   #
 #         old. It would get moved even if MINUTES_OLD was set.      #
 #                                                                   #
 #         Big thanks to DaShizNit for ideas and testing the 2.+     #
@@ -324,8 +325,8 @@ proc_move() {
 
   if [ "$TULS" ]; then
     if [ ! -x "$TULS" ]; then
-      echo "Warning. Cant execute $TULS. Check perms."
-      echo "Leave the TULS= option empty to disable or fix so tuls is executable."
+      echo "Warning. Cannot execute $TULS. Check perms."
+      echo "Leave the TULS= option empty to disable, or make tuls executable."
       exit 1
     else    
       reldate="`$TULS | grep "\:\:\:\:$releasename\:\:\:\:" | head -n1 | cut -d ':' -f17- | cut -d '^' -f3,2,5,4 | tr '^' ' '`" 
@@ -349,7 +350,7 @@ proc_move() {
     $HOW_TO_MOVE "$SOURCE_DIR/$releasename" "$TO_DIR"
   fi
 
-  ## Make a symlink it the original location, if enabled.
+  ## Make a symlink to the original location, if enabled.
   if [ "$REVERSED_SYMLINK" = "TRUE" ]; then
     if [ "$DEBUG" = "TRUE" ]; then
       echo "$HOW_TO_SYMLINK \"$TO_DIRSYM/$releasename\" \"$SOURCE_DIR/$releasename\""
@@ -395,7 +396,7 @@ proc_checkold() {
     REL_DATE="`$DATE_BIN -d "$($FILE_DATE $FROM_DIR/$releasename)" +%s`"
     if [ -z "$REL_DATE" ]; then
       SKIP=YES
-      proc_debug "Skipping move of $releasename - Seems to be from right now or in the future... or $FILE_DATE dosnt work."
+      proc_debug "Skipping move of $releasename - Seems to be from right now or in the future... or $FILE_DATE doesn't work."
     else
       REL_SEC_OLD="`echo "$NOW_DATE - $REL_DATE" | bc -l | cut -d '.' -f1`"
       if [ -z "$REL_SEC_OLD" ]; then
@@ -418,21 +419,21 @@ proc_checkold() {
 proc_checkfor() {
   if [ "$CHECK_FOR" ] && [ "$SKIP" != "YES" ]; then
 
-    ## Multiple CD's ?
+    ## Multiple CD's?
     if [ "`ls -1 $releasename | grep "^[cC][dD][1-9]$"`" ]; then
 
       for each_cd in `ls -1 $releasename | grep "^[cC][dD][1-9]$"`; do
         if [ -z "`ls -1 $releasename/$each_cd | egrep "$CHECK_FOR"`" ]; then
           if [ "$NO_SFV_OK" = "TRUE" ]; then
             if [ "`ls -1 $releasename/$each_cd | grep "\.[sS][fF][vV]$"`" ]; then
-              proc_debug "Skipping $releasename - $each_cd does not seem complete and a sfv exists."
+              proc_debug "Skipping $releasename - $each_cd does not seem complete and an sfv exists."
               SKIP=YES
               break
             else
               proc_debug "OK on $releasename/$each_cd - $each_cd does not seem complete and no sfv exists."
             fi
           else
-            proc_debug "Skipping $releasename - $each_cd does not seem completed."
+            proc_debug "Skipping $releasename - $each_cd does not seem complete."
             SKIP=YES
             break
           fi
@@ -444,10 +445,10 @@ proc_checkfor() {
       if [ -z "`ls -1 $releasename | egrep "$CHECK_FOR"`" ]; then
         if [ "$NO_SFV_OK" = "TRUE" ]; then
           if [ "`ls -1 $releasename | grep "\.[sS][fF][vV]$"`" ]; then
-            proc_debug "Skipping $releasename - Does not seem complete and a sfv exists."
+            proc_debug "Skipping $releasename - Does not seem complete and an sfv exists."
             SKIP=YES
           else
-            proc_debug "OK on $releasename - does not seem complete and no sfv exists."
+            proc_debug "OK on $releasename - Does not seem complete and no sfv exists."
           fi
         else
           proc_debug "Skipping $releasename - Does not seem complete."
@@ -461,7 +462,7 @@ proc_checkfor() {
 if [ "$MINUTES_OLD" ]; then
   NOW_DATE="`$DATE_BIN +%s`"
   if [ ! -x "$FILE_DATE" ]; then
-    echo "Error. MINUTES_OLD is defined but cant find/execute file_date from $FILE_DATE"
+    echo "Error. MINUTES_OLD is defined, but can't find/execute file_date from $FILE_DATE"
     exit 1
   fi
 fi
